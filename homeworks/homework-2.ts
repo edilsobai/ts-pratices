@@ -15,7 +15,10 @@ const wRate: number = 2
 const monthPayments: number[] = [0, 0] /*electricity, water */
 
 function calculatePayments(
-  elData: {
+  {
+    mode,
+    readings
+  }: {
   mode: string,
   readings: number
   }, 
@@ -25,11 +28,11 @@ function calculatePayments(
   elRate: number, 
   wRate: number
 ): void {
-  if(elData.mode === "double" && elData.readings < 50) {
-    monthPayments[0] = elData.readings * elRate * 0.7
+  if(mode === "double" && readings < 50) {
+    monthPayments[0] = readings * elRate * 0.7
   } 
   else{ 
-    monthPayments[0] = elData.readings * elRate
+    monthPayments[0] = readings * elRate
   }    
   monthPayments[1] = wData.readings * wRate
 }
@@ -37,7 +40,7 @@ function calculatePayments(
 calculatePayments(electricityUserData, waterUserData,elRate, wRate)
 
 function sendInvoice(
-  monthPayments:number[],
+  [electricity, water]: number[],
   electricityUserData: {
     readings: number,
     units: string
