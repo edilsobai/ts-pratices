@@ -1,7 +1,7 @@
 const currRate: string = "1.05"
 
 const fetchCurr = (response: string): number => {
-  const data = JSON.parse(response)
+  const data: number = JSON.parse(response)
   return data
 }
 
